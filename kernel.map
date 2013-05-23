@@ -1,0 +1,488 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x08048000                .=(0x8048000+SIZEOF_HEADERS)
+
+.interp
+ *(.interp)
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.init
+ *(.init)
+
+.plt
+ *(.plt)
+
+.text           0x00020000     0x5042
+ *(.text)
+ .text          0x00020000      0xdfc kernel.o
+                0x00020000                kernel_entry
+                0x000206fa                video_mode
+                0x000206fc                vbe_info
+                0x000209fc                modes
+                0x000208fc                mode_info
+ *fill*         0x00020dfc        0x4 37008
+ .text          0x00020e00      0xbeb main.o
+                0x00021810                player::move_to(int, int)
+                0x0002177c                referee::~referee(void)
+                0x00020f0c                player::run(void)
+                0x00021994                player::~player(void)
+                0x00021478                referee::referee(void)
+                0x000218c4                player::erase_tile(int, int)
+                0x00021790                input_controller::run(void)
+                0x00021948                player::player(int, int, int, pattern *, fifo *, fifo *)
+                0x000217fc                input_controller::~input_controller(void)
+                0x000219a8                random(int)
+                0x00021908                player::draw_tile(int, int)
+                0x0002174c                cpu_load::cpu_load(void)
+                0x000216bc                cpu_load::run(void)
+                0x0002156c                referee::run(void)
+                0x00021670                main
+                0x000217d8                input_controller::input_controller(fifo *)
+                0x00021768                cpu_load::~cpu_load(void)
+                0x00020e00                player::draw_score(void)
+ *fill*         0x000219eb        0x5 37008
+ .text          0x000219f0      0xa76 thread.o
+                0x00022430                mutex::lock(void)
+                0x000220dc                primordial_thread::run(void)
+                0x00021c68                scheduler::timer_elapsed(void)
+                0x00022194                primordial_thread::~primordial_thread(void)
+                0x000220b8                scheduler::reschedule_thread(thread *)
+                0x00022458                mutex::mutex(void)
+                0x00022388                condvar::wait(mutex *)
+                0x000222c4                condvar::mutexless_signal(void)
+                0x00021da8                scheduler::set_timer(time, time)
+                0x000220e8                primordial_thread::primordial_thread(void (*)(void))
+                0x0002230c                condvar::broadcast(void)
+                0x00021b54                scheduler::setup(void (*)(void))
+                0x000221c4                thread::self(void)
+                0x000221f8                thread::~thread(void)
+                0x00021c58                scheduler::setup_timer(void)
+                0x00021f74                scheduler::switch_to_next_thread(unsigned int, unsigned int, unsigned int *, void *)
+                0x00021a74                thread::join(void)
+                0x00022384                condvar::wait_or_timeout(mutex *, time)
+                0x00022228                thread::thread(void)
+                0x000222f4                condvar::mutexless_wait(void)
+                0x000221cc                thread::yield(void)
+                0x00021e34                scheduler::suspend_on_sleep_queue(unsigned int, unsigned int, unsigned int *, void *)
+                0x00021d9c                irq0
+                0x000219f0                mutex::lock_or_timeout(time)
+                0x000221e4                thread::start(void)
+                0x0002234c                condvar::signal(void)
+                0x000223e8                condvar::condvar(void)
+                0x000223f4                mutex::unlock(void)
+                0x00021ef8                scheduler::suspend_on_wait_queue(unsigned int, unsigned int, unsigned int *, void *)
+                0x00021ff4                scheduler::resume_next_thread(void)
+                0x0002204c                scheduler::run_thread(void)
+ *fill*         0x00022466        0xa 37008
+ .text          0x00022470       0x73 time.o
+                0x00022470                setup_time(void)
+ *fill*         0x000224e3        0xd 37008
+ .text          0x000224f0      0x1ac ps2.o
+                0x00022620                irq1
+                0x000225ec                setup_ps2(void)
+                0x0002263c                getchar(void)
+ *fill*         0x0002269c        0x4 37008
+ .text          0x000226a0      0x2be fifo.o
+                0x00022764                fifo::get(unsigned char *)
+                0x000226a0                fifo::get_or_timeout(unsigned char *, time)
+                0x00022928                fifo::fifo(void)
+                0x0002280c                fifo::put(unsigned char)
+                0x00022908                fifo::~fifo(void)
+ *fill*         0x0002295e        0x2 37008
+ .text          0x00022960     0x1030 term.o
+                0x000236dc                operator<<(term &, short)
+                0x000234cc                operator<<(term &, wchar_t *)
+                0x000234f8                operator<<(term &, char *)
+                0x000238e8                term::hide_cursor(void)
+                0x000237e4                term::scroll_up(void)
+                0x00023590                operator<<(term &, unsigned long long)
+                0x00023898                term::toggle_cursor(void)
+                0x00023670                operator<<(term &, unsigned short)
+                0x00023704                operator<<(term &, bool)
+                0x000236f0                operator<<(term &, signed char)
+                0x00023728                term::color_to_pattern(int, pattern *&)
+                0x00022960                term::show(void)
+                0x00023698                operator<<(term &, long long)
+                0x000238fc                term::show_cursor(void)
+                0x00023538                operator<<(term &, void *)
+                0x00022ae4                term::write(wchar_t *, int)
+                0x00023910                term::term(int, int, int, int, font *, wchar_t *, bool)
+                0x000236b0                operator<<(term &, int)
+                0x00023684                operator<<(term &, unsigned char)
+                0x00023610                operator<<(term &, unsigned int)
+                0x00023780                term::char_coord_to_screen_coord(int, int, int &, int &, int &, int &)
+ .text          0x00023990     0x1305 video.o
+                0x00024b94                video::video(int)
+                0x00024908                font::get_max_width(void)
+                0x00024998                raw_bitmap::frame_rect(int, int, int, int, int, pattern *)
+                0x0002415c                raw_bitmap::fill_rect(int, int, int, int, pattern *)
+                0x00023c18                raw_bitmap::bitblt(int, int, int, int, raw_bitmap *, int, int, pattern *, pattern *)
+                0x00024b8c                video::show_mouse(void)
+                0x00024b90                video::hide_mouse(void)
+                0x00023990                video::draw_mouse(void)
+                0x00024a80                video::get_mouse_rect(int *, int *)
+                0x00024708                font::draw_string(raw_bitmap *, int, int, wchar_t *, pattern *, pattern *)
+                0x00024900                font::get_height(void)
+                0x00024c78                pattern::pattern(unsigned char *, int, int)
+                0x00024ae0                video::move_mouse(int, int)
+                0x000248bc                font::get_char_data(wchar_t, int &, int &)
+                0x00024a4c                raw_bitmap_in_memory::hide_mouse(void)
+                0x00024a48                raw_bitmap_in_memory::show_mouse(void)
+                0x00024a50                raw_bitmap_in_memory::raw_bitmap_in_memory(unsigned char *, int, int, int)
+                0x000247ec                font::draw_text(raw_bitmap *, int, int, wchar_t *, int, pattern *, pattern *)
+                0x00024b48                video::select_layer(int)
+                0x00024c34                pattern::get_word(int, int)
+                0x00024910                font::font(int, int, int, unsigned short *, unsigned int *, raw_bitmap *)
+                0x0002494c                raw_bitmap::invert_rect(int, int, int, int)
+                0x00024a2c                raw_bitmap_in_memory::select_layer(int)
+ *fill*         0x00024c95        0x3 37008
+ .text          0x00024c98       0xf9 intr.o
+                0x00024d2c                irq12
+                0x00024d44                irq10
+                0x00024d14                irq14
+                0x00024d58                irq8
+                0x00024c98                setup_intr(void)
+                0x00024d38                irq11
+                0x00024d74                irq5
+                0x00024d6c                irq6
+                0x00024d4c                irq9
+                0x00024d20                irq13
+                0x00024d8c                irq2
+                0x00024cfc                APIC_timer_irq
+                0x00024cf0                APIC_spurious_irq
+                0x00024d64                irq7
+                0x00024d08                irq15
+                0x00024cc0                unhandled_interrupt
+                0x00024d7c                irq4
+                0x00024d84                irq3
+ *fill*         0x00024d91        0xf 37008
+ .text          0x00024da0      0x2a2 rtlib.o
+                0x00024e54                __pure_virtual
+                0x00024fa0                fatal_error(char *)
+                0x00024e74                memcpy
+                0x00024ef8                log2(unsigned int)
+                0x00024f70                __umoddi3
+                0x00024f10                __udivdi3
+                0x00024e14                __do_global_ctors(void)
+                0x00024e9c                __builtin_vec_new
+                0x00024edc                kmalloc(unsigned int)
+                0x00024ed8                kfree(void *)
+                0x00024e98                __builtin_vec_delete
+                0x00024eb8                __builtin_delete
+                0x00024ebc                __builtin_new
+                0x00024da0                __rtlib_entry
+                0x00024e10                __do_global_dtors(void)
+ *(.stub)
+ *(.gnu.warning)
+ *(.gnu.linkonce.t*)
+                0x00025042                _etext=.
+                0x00025042                PROVIDE (etext, .)
+
+.fini
+ *(.fini)
+
+.rodata         0x00025060      0x2af
+ *(.rodata)
+ .rodata        0x00025060       0xc4 main.o
+                0x000250b8                input_controller virtual table
+                0x000250a8                referee virtual table
+                0x00025098                cpu_load virtual table
+                0x000250c8                player virtual table
+ .rodata        0x00025124       0x40 thread.o
+                0x00025144                primordial_thread virtual table
+                0x00025154                thread virtual table
+ .rodata        0x00025164        0xc fifo.o
+                0x00025164                fifo virtual table
+ *fill*         0x00025170       0x10
+ .rodata        0x00025180       0xa0 term.o
+ .rodata        0x00025220       0x28 video.o
+                0x00025220                video virtual table
+                0x00025234                raw_bitmap_in_memory virtual table
+ .rodata        0x00025248       0x21 intr.o
+ *fill*         0x00025269       0x17
+ .rodata        0x00025280       0x8f rtlib.o
+ *(.gnu.linkonce.r*)
+
+.rodata1
+ *(.rodata1)
+                0x0002630f                .=(ALIGN(0x1000)+(.&0xfff))
+
+.data           0x00026320    0x465f0
+ *(.data)
+ .data          0x00026320        0x4 main.o
+ .data          0x00026324       0x18 time.o
+                0x0002632c                pos_infinity
+                0x00026334                neg_infinity
+ *fill*         0x0002633c        0x4
+ .data          0x00026340      0x2e0 ps2.o
+ .data          0x00026620    0x462d4 video.o
+ .data          0x0006c8f4        0x4 rtlib.o
+ *(.gnu.linkonce.d*)
+                0x0006c8f8                __CTOR_LIST__=.
+                0x0006c8f8        0x4 LONG 0x2 (((__CTOR_END__-__CTOR_LIST__)/0x4)-0x2)
+ *(.ctors)
+ .ctors         0x0006c8fc        0x4 term.o
+ .ctors         0x0006c900        0x4 video.o
+                0x0006c904        0x4 LONG 0x0
+                0x0006c908                __CTOR_END__=.
+                0x0006c908                __DTOR_LIST__=.
+                0x0006c908        0x4 LONG 0x0 (((__DTOR_END__-__DTOR_LIST__)/0x4)-0x2)
+ *(.dtors)
+                0x0006c90c        0x4 LONG 0x0
+                0x0006c910                __DTOR_END__=.
+
+.data1
+ *(.data1)
+
+.ctors
+ *(.ctors)
+
+.dtors
+ *(.dtors)
+
+.got
+ *(.got.plt)
+ *(.got)
+
+.dynamic
+ *(.dynamic)
+
+.sdata
+ *(.sdata)
+                0x0006c910                _edata=.
+                0x0006c910                PROVIDE (edata, .)
+                0x0006c910                __bss_start=.
+
+.sbss
+ *(.sbss)
+ *(.scommon)
+
+.bss            0x0006c920      0x230
+ *(.dynbss)
+ *(.bss)
+ .bss           0x0006c920       0x10 thread.o
+                0x0006c928                scheduler::sleepq
+                0x0006c920                scheduler::current_thread
+                0x0006c924                scheduler::the_primordial_thread
+                0x0006c92c                scheduler::readyq
+ .bss           0x0006c930        0x4 time.o
+                0x0006c930                _tsc_counts_per_sec
+ *fill*         0x0006c934        0xc
+ .bss           0x0006c940       0x44 ps2.o
+ *fill*         0x0006c984       0x1c
+ .bss           0x0006c9a0       0x5c term.o
+                0x0006c9a0                term::console
+ *fill*         0x0006c9fc        0x4
+ .bss           0x0006ca00      0x150 video.o
+                0x0006caec                pattern::gray75
+                0x0006cab0                pattern::blue
+                0x0006caf8                pattern::gray50
+                0x0006cabc                pattern::yellow
+                0x0006cad4                pattern::red
+                0x0006ca98                pattern::cyan
+                0x0006cac8                pattern::green
+                0x0006ca84                video::mouse_save
+                0x0006caa4                pattern::magenta
+                0x0006cb04                pattern::gray25
+                0x0006ca60                video::screen
+                0x0006ca00                font::mono_6x9
+                0x0006cb10                pattern::black
+                0x0006cae0                pattern::white
+                0x0006ca2c                font::mono_5x7
+ *(COMMON)
+                0x0006cb50                .=ALIGN(0x4)
+                0x0006cb50                _end=.
+                0x0006cb50                PROVIDE (end, .)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000      0x225
+ *(.comment)
+ .comment       0x00000000       0x3d main.o
+ .comment       0x0000003d       0x3d thread.o
+ .comment       0x0000007a       0x3d time.o
+ .comment       0x000000b7       0x3d ps2.o
+ .comment       0x000000f4       0x3d fifo.o
+ .comment       0x00000131       0x3d term.o
+ .comment       0x0000016e       0x3d video.o
+ .comment       0x000001ab       0x3d intr.o
+ .comment       0x000001e8       0x3d rtlib.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+LOAD kernel.o
+LOAD main.o
+LOAD thread.o
+LOAD time.o
+LOAD ps2.o
+LOAD fifo.o
+LOAD term.o
+LOAD video.o
+LOAD intr.o
+LOAD rtlib.o
+Address of section .text set to 0x20000
+OUTPUT(kernel.bin binary)
+
+.note           0x0006cb50       0xb4
+ .note          0x0006cb50       0x14 main.o
+ .note          0x0006cb64       0x14 thread.o
+ .note          0x0006cb78       0x14 time.o
+ .note          0x0006cb8c       0x14 ps2.o
+ .note          0x0006cba0       0x14 fifo.o
+ .note          0x0006cbb4       0x14 term.o
+ .note          0x0006cbc8       0x14 video.o
+ .note          0x0006cbdc       0x14 intr.o
+ .note          0x0006cbf0       0x14 rtlib.o
